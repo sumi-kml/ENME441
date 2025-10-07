@@ -5,9 +5,18 @@ import math
 GPIO.setmode(GPIO.BCM)
 
 pins = [17, 27, 22, 5, 6, 13, 19, 26, 21, 20]
+button = 4
 base_f = 500
 f = 0.2
 phi = math.pi / 11
+
+GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+def flip(pin):
+    global direction
+    direction *= -1
+
+GPIO.add_event_detect(button, GPIO.BOTH, callback=flip, bouncetime=500)
 
 pwms = []
 for p in pins:
@@ -25,5 +34,6 @@ try:
 			pwms[i].ChangeDutyCycle(100 * dc)
 except:
 	GPIO.cleanup()
+
 
 
