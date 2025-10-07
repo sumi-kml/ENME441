@@ -9,6 +9,7 @@ button = 4
 base_f = 500
 f = 0.2
 phi = math.pi / 11
+direction = 1
 
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
@@ -34,6 +35,7 @@ try:
 			pwms[i].ChangeDutyCycle(100 * dc)
 except:
 	GPIO.cleanup()
+
 
 
 
