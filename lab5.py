@@ -35,8 +35,3 @@ try:
 			pwms[i].ChangeDutyCycle(100 * dc)
 except:
 	GPIO.cleanup()
-
-
-
-
-
