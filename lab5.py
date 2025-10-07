@@ -30,11 +30,12 @@ try:
 	while 1:
 		t = time.time()
 		for i in range (10):
-			phase = i * phi
+			phase = i * phi * direction
 			dc = (math.sin(2 * math.pi * f * t - phase)) ** 2
 			pwms[i].ChangeDutyCycle(100 * dc)
 except:
 	GPIO.cleanup()
+
 
 
 
