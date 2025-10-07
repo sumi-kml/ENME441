@@ -10,7 +10,8 @@ base_f = 500
 f = 0.2
 phi = math.pi / 11
 
-GPIO.setup(p, GPIO.OUT)
+GPIO.setup(p1, GPIO.OUT)
+GPIO.setup(p2, GPIO.OUT)
 
 pwm1 = GPIO.PWM(p1, base_f) 
 pwm2 = GPIO.PWM(p2, base_f) 
@@ -26,3 +27,4 @@ try:
 		pwm2.ChangeDutyCycle(100 * b2)
 except:
 	GPIO.cleanup()
+
