@@ -50,6 +50,7 @@ GPIO.add_event_detect(s2, GPIO.BOTH, callback=flip, bouncetime=500)
         
 try:
     while True:
+        print("s1:", GPIO.input(s1), "s3:", GPIO.input(s3))
         if GPIO.input(s1):
             if not b.run:
                 try:
