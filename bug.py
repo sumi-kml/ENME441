@@ -36,11 +36,8 @@ class Bug:
 
 b = Bug()
 
-def flip(pin):
-    b.isWrapOn = not b.isWrapOn
+test = GPIO.input(s2)
 
-GPIO.add_event_detect(s2, GPIO.BOTH, callback=flip, bouncetime=500)
-        
 try:
     while True:
         if GPIO.input(s1):
@@ -48,11 +45,15 @@ try:
         else:
             b.stop()
 
+        if GPIO.input(s2) != test:
+            b.isWrapOn = not b.isWrapOn
+        
         if GPIO.input(s3):
             b.timestep = 0.1 / 3
         else:
             b.timestep = 0.1
 
+        test = GPIO.input(s2)
         time.sleep(b.timestep)
 except KeyboardInterrupt:
     pass
