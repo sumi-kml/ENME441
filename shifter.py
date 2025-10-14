@@ -25,10 +25,3 @@ class Shifter:
       GPIO.output(self.serialPin, b & (1<<i))
       self.__ping(self.clockPin) 
     self.__ping(self.latchPin) 
-
-try:
-  a = Shifter(23, 25, 24)
-  a.shiftByte(0b01100111)
-  while 1: pass
-except:
-  GPIO.cleanup()  
