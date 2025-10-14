@@ -7,9 +7,9 @@ s1, s2, s3 = 16, 20, 21
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(s1, GPIO.IN)
-GPIO.setup(s2, GPIO.IN)
-GPIO.setup(s3, GPIO.IN)
+GPIO.setup(s1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(s2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(s3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 class Bug:
     def __init__(self, timestep = 0.1, x = 3, isWrapOn = False):
