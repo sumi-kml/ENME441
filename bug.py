@@ -13,7 +13,6 @@ GPIO.setup(s2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(s3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 class Bug:
-class Bug:
     def __init__(self, timestep=0.1, x=3, isWrapOn=False):
         self.timestep = timestep
         self.x = x
