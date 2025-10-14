@@ -48,15 +48,19 @@ def flip(pin):
 
 GPIO.add_event_detect(s2, GPIO.BOTH, callback=flip, bouncetime=500)
         
-while True:
-    if GPIO.input(s1):
-        if not b.run:
-            b.start()
-    else:
-        b.stop()
-    
-    if GPIO.input(s3):
-        b.timestep = 0.1 / 3
-    else:
-        b.timestep = 0.1
+try:
+    while True:
+        if GPIO.input(s1):
+            if not b.run:
+                b.start()
+        else:
+            b.stop()
+
+        if GPIO.input(s3):
+            b.timestep = 0.1 / 3
+        else:
+            b.timestep = 0.1
+except:
+    GPIO.cleanup()
+
     
