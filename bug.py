@@ -2,6 +2,7 @@ from shifter import Shifter
 import RPi.GPIO as GPIO
 import time
 import random
+import threading
 
 s1, s2, s3 = 16, 20, 21
 
@@ -53,11 +54,8 @@ try:
         print("s1:", GPIO.input(s1), "s3:", GPIO.input(s3))
         if GPIO.input(s1):
             if not b.run:
-                try:
-                    b.start()
-                except KeyboardInterrupt:
-                    b.stop()
-                    break
+                b.run = True
+                threading.Thread(target=b.start).start()
         else:
             b.stop()
 
