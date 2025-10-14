@@ -52,7 +52,11 @@ try:
     while True:
         if GPIO.input(s1):
             if not b.run:
-                b.start()
+                try:
+                    b.start()
+                except KeyboardInterrupt:
+                    b.stop()
+                    break
         else:
             b.stop()
 
@@ -60,7 +64,10 @@ try:
             b.timestep = 0.1 / 3
         else:
             b.timestep = 0.1
-except:
+except KeyboardInterrupt:
+    pass
+finally:
     GPIO.cleanup()
+
 
     
