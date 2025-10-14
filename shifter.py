@@ -28,7 +28,7 @@ class Shifter:
 
 try:
   a = Shifter(23, 25, 24)
-  a.shiftByte(0b01100110)
+  a.shiftByte(0b01100111)
   while 1: pass
 except:
   GPIO.cleanup()  
