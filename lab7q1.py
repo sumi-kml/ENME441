@@ -25,7 +25,7 @@ def control_leds():
         led = int(request.form['led'])
         brightness = int(request.form['brightness'])
         brightness_levels[led] = brightness
-        led_pwms[led].ChangeDutyCycle(brightness)  # Set brightness
+        led_pwms[led].ChangeDutyCycle(brightness)  
 
     return render_template_string('''
         <form method="POST">
