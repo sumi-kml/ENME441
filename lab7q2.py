@@ -28,9 +28,8 @@ def control_leds():
         led_pwms[led].ChangeDutyCycle(brightness)
     
     return render_template_string('''
-        <h2>LED Brightness Control</h2>
         {% for i in range(1, 4) %}
-          <label for="led{{ i }}">LED {{ i }}:</label>
+          <label for="led{{ i }}">LED{{ i }}</label>
           <input type="range" id="led{{ i }}" min="0" max="100" value="{{ brightness_levels[i] }}"
                  oninput="updateBrightness({{ i }}, this.value)">
           <span id="val{{ i }}">{{ brightness_levels[i] }}</span><br><br>
