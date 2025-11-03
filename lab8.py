@@ -127,19 +127,12 @@ if __name__ == '__main__':
     m1.zero()
     m2.zero()
     m1.goAngle(90)
-    print("1 Angle1:", m1.angle.value)
     m1.goAngle(-45)
-    print("2 Angle1:", m1.angle.value)
     m2.goAngle(-90)
-    print("1 Angle2:", m2.angle.value)
     m2.goAngle(45)
-    print("2 Angle2:", m2.angle.value)
     m1.goAngle(-135)
-    print("3 Angle1:", m1.angle.value)
     m1.goAngle(135)
-    print("4 Angle1:", m1.angle.value)
     m1.goAngle(0)
-    print("5 Angle1:", m1.angle.value) 
  
     # While the motors are running in their separate processes, the main
     # code can continue doing its thing: 
