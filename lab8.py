@@ -131,7 +131,7 @@ if __name__ == '__main__':
     print("2 Angle1:", m1.angle.value)
     m2.goAngle(-90)
     print("1 Angle2:", m2.angle.value)
-    m2.goAngle(45
+    m2.goAngle(45)
     print("2 Angle2:", m2.angle.value)
     m1.goAngle(-135)
     print("3 Angle1:", m1.angle.value)
