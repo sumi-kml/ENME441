@@ -41,7 +41,7 @@ class Stepper:
 
     def __init__(self, shifter, lock):
         self.s = shifter           # shift register
-        self.angle = 0             # current output shaft angle
+        self.angle = multiprocessing.Value('d', 0.0)  # 'd' = double precision float         
         self.step_state = 0        # track position in sequence
         self.shifter_bit_start = 4*Stepper.num_steppers  # starting bit position
         self.lock = lock           # multiprocessing lock
@@ -104,7 +104,8 @@ class Stepper:
 
     # Set the motor zero point
     def zero(self):
-        self.angle = 0
+        with self.angle.get_lock():
+            self.angle.value = 0.0
 
 
 # Example use:
