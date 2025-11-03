@@ -88,13 +88,13 @@ class Stepper:
     # Move to an absolute angle taking the shortest possible path:
     def goAngle(self, angle):
          # Normalize target angle to [0, 360)
-        target_angle %= 360
+        angle %= 360
     
         # Read current angle from shared memory
         current_angle = self.angle.value
     
         # Compute shortest rotation delta
-        delta = (target_angle - current_angle + 180) % 360 - 180
+        delta = (angle - current_angle + 180) % 360 - 180
     
         # Launch rotation in a separate process
         time.sleep(0.1)
