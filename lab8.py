@@ -64,8 +64,10 @@ class Stepper:
         # Send updated bitmask to shift register
         self.s.shiftByte(Stepper.shifter_outputs)
         # Update angle
-        self.angle += dir / Stepper.steps_per_degree
-        self.angle %= 360
+        with self.angle.get_lock():
+            self.angle.value += dir / Stepper.steps_per_degree
+            self.angle.value %= 360
+
 
     # Move relative angle from current position:
     def __rotate(self, delta):
@@ -85,8 +87,20 @@ class Stepper:
 
     # Move to an absolute angle taking the shortest possible path:
     def goAngle(self, angle):
-         pass
-         # COMPLETE THIS METHOD FOR LAB 8
+         # Normalize target angle to [0, 360)
+        target_angle %= 360
+    
+        # Read current angle from shared memory
+        current_angle = self.angle.value
+    
+        # Compute shortest rotation delta
+        delta = (target_angle - current_angle + 180) % 360 - 180
+    
+        # Launch rotation in a separate process
+        time.sleep(0.1)
+        p = multiprocessing.Process(target=self.__rotate, args=(delta,))
+        p.start()
+
 
     # Set the motor zero point
     def zero(self):
@@ -108,23 +122,15 @@ if __name__ == '__main__':
     m1 = Stepper(s, lock1)
     m2 = Stepper(s, lock2)
 
-    # Zero the motors:
     m1.zero()
     m2.zero()
-
-    # Move as desired, with eacg step occuring as soon as the previous 
-    # step ends:
-    m1.rotate(-90)
-    m1.rotate(45)
-    m1.rotate(-90)
-    m1.rotate(45)
-
-    # If separate multiprocessing.lock objects are used, the second motor
-    # will run in parallel with the first motor:
-    m2.rotate(180)
-    m2.rotate(-45)
-    m2.rotate(45)
-    m2.rotate(-90)
+    m1.goAngle(90)
+    m1.goAngle(-45)
+    m2.goAngle(-90)
+    m2.goAngle(45)
+    m1.goAngle(-135)
+    m1.goAngle(135)
+    m1.goAngle(0)
  
     # While the motors are running in their separate processes, the main
     # code can continue doing its thing: 
